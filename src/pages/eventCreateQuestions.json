@@ -1,0 +1,104 @@
+[
+  {
+    "step": 1,
+    "field": "event_Name",
+    "label": "What is the name of the event?",
+    "description": "🔖 Name your event like a pro! Keep it short, fun, and catchy.",
+    "type": "text",
+    "placeholder": "Event name"
+  },
+  {
+    "step": 2,
+    "field": "event",
+    "label": "What type of event is it?",
+    "description": "🎭 What kind of vibe? Choose your event type or drop your own!",
+    "type": "select-with-custom",
+    "options": ["Food Fest", "Ethnic Day", "Cultural", "Art & Craft Expo", "Workshop", "Symbolism", "Other"]
+  },
+  {
+    "step": 3,
+    "field": "event_schedule",
+    "label": "When will it happen?",
+    "description": "📅 Lock the date & time — let everyone know when it's happening!",
+    "type": "event-datetime"
+  },
+  {
+    "step": 4,
+    "field": "venue",
+    "label": "Where is the venue?",
+    "description": "🏟️ Enter the venue name — where all the action will take place!",
+    "type": "text",
+    "placeholder": "e.g. Main Auditorium, Block A Seminar Hall"
+  },
+  {
+    "step": 5,
+    "field": "event_categories",
+    "label": "Pick events for each category",
+    "description": "🎯 What's inside? Add activities from tech to dance, or create your own.",
+    "type": "category-event-selection",
+    "categories": [
+      {
+        "label": "Technical",
+        "events": ["Paper Presentation", "Project Expo", "Workshop", "Debugging", "Tech Quiz", "CAD Modeling", "Coding Contest", "Ethical Hacking", "Robotics Competition", "App Development", "Web Design", "Math Olympiad", "Machine Learning Demo"]
+      },
+      {
+        "label": "Non-Technical",
+        "events": ["Photography", "Painting", "Drama / Skit", "Solo Dance", "Group Dance", "Singing", "Short Film", "Contest", "Puzzle Solving", "Dumb Charades", "Creative Writing", "JAM (Just A Minute)", "Gaming (LAN/PC/Mobile)", "Memory Test / Aptitude"]
+      }
+    ]
+  },
+  {
+    "step": 6,
+    "field": "participant_mode",
+    "label": "How are participants involved?",
+    "description": "👥 Tell us how users will participate — like solo entries, team battles, or open registration.",
+    "type": "select-with-custom",
+    "options": ["Individual", "Team", "Open for All", "Pre-Registration Required", "Other"]
+  },
+  {
+    "step": 7,
+    "field": "Department",
+    "label": "Which departments are organizing the event?",
+    "description": "🏫 Which departments are in? Pick all the organizers behind the scenes.",
+    "type": "department-select",
+    "options": ["AI&DS", "CSE", "ECE", "MECH", "IT", "Bio-Med", "EEE", "Food-Tech", "Civil"]
+  },
+  {
+    "step": 8,
+    "field": "event_location",
+    "label": "Event location (Coordinates)",
+    "description": "📍 Pin the spot! Drop your event's exact coordinates or use your current location.",
+    "type": "coordinates",
+    "placeholders": ["Longitude", "Latitude"]
+  },
+  {
+    "step": 9,
+    "field": "creator_details",
+    "label": "Who is creating this event?",
+    "description": "🧑 Enter your name and contact info so others know who organized this event.",
+    "type": "creator-details"
+  },
+  {
+    "step": 10,
+    "field": "event_banner",
+    "label": "Upload Event Banner or Photo",
+    "description": "🖼️ Make your event stand out! Upload an eye-catching banner or poster.",
+    "type": "image-url-upload",
+    "placeholder": "Choose an image"
+  },
+  {
+    "step": 11,
+    "field": "event_description",
+    "label": "Describe your event",
+    "description": "📝 Write a short story about your event — what's happening, who should attend, and why it's awesome!",
+    "type": "textarea",
+    "placeholder": "Example: Join us for an exciting tech showdown where minds meet machines!"
+  },
+  {
+    "step": 12,
+    "field": "review",
+    "label": "Review & Create Event",
+    "description": "✅ Final check! Review everything before creating your awesome event.",
+    "type": "review"
+  }
+]

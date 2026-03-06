@@ -1,0 +1,564 @@
+/* ══════════════════════════════════════════
+   CreateEvent Wizard  —  theme-aware
+   Uses AdminLayout.css variables.
+   Includes base UI component styles that
+   are NOT provided by any CSS framework.
+   ══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════
+   BASE UI COMPONENTS (no Bootstrap)
+   ═══════════════════════════════════ */
+
+/* ── form-label ── */
+.cew-container .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: var(--weight-medium, 500);
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-text);
+}
+
+/* ── form-control / form-select ── */
+.cew-container .form-control,
+.cew-container .form-select {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font-size: var(--text-base, 1rem);
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 0.5rem);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  line-height: 1.5;
+  appearance: none;
+}
+
+.cew-container .form-control:focus,
+.cew-container .form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-100, rgba(139, 92, 246, 0.15));
+  outline: none;
+}
+
+.cew-container .form-control::placeholder {
+  color: var(--color-text-muted);
+}
+
+.cew-container textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ── form-floating ── */
+.cew-container .form-floating {
+  position: relative;
+}
+
+.cew-container .form-floating > .form-control {
+  padding: 1.4rem 0.85rem 0.5rem;
+}
+
+.cew-container .form-floating > label {
+  position: absolute;
+  top: 0;
+  left: 0.85rem;
+  padding: 0.6rem 0;
+  font-size: var(--text-base, 1rem);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition: transform 0.15s ease, opacity 0.15s ease, color 0.15s ease;
+}
+
+.cew-container .form-floating > .form-control:focus ~ label,
+.cew-container .form-floating > .form-control:not(:placeholder-shown) ~ label {
+  transform: scale(0.78) translateY(-0.55rem);
+  color: var(--color-primary);
+  opacity: 0.85;
+}
+
+/* ── input-group ── */
+.cew-container .input-group {
+  display: flex;
+  width: 100%;
+}
+
+.cew-container .input-group > .form-control {
+  flex: 1 1 auto;
+  border-radius: var(--radius-md, 0.5rem) 0 0 var(--radius-md, 0.5rem);
+}
+
+.cew-container .input-group > .btn {
+  border-radius: 0;
+}
+
+.cew-container .input-group > .btn:last-child {
+  border-radius: 0 var(--radius-md, 0.5rem) var(--radius-md, 0.5rem) 0;
+}
+
+/* ── buttons ── */
+.cew-container .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--weight-medium, 500);
+  font-family: inherit;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md, 0.5rem);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.cew-container .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* sizes */
+.cew-container .btn-sm {
+  padding: 0.3rem 0.7rem;
+  font-size: var(--text-xs, 0.75rem);
+}
+
+/* rounded pill */
+.cew-container .rounded-pill {
+  border-radius: 9999px !important;
+}
+
+/* ── btn-primary ── */
+.cew-container .btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.cew-container .btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: 0 2px 8px var(--color-primary-200, rgba(139, 92, 246, 0.25));
+}
+
+/* ── btn-success ── */
+.cew-container .btn-success {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: #fff;
+}
+
+.cew-container .btn-success:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+/* ── btn-outline-primary ── */
+.cew-container .btn-outline-primary {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: transparent;
+}
+
+.cew-container .btn-outline-primary:hover:not(:disabled),
+.cew-container .btn-outline-primary.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* ── btn-outline-success ── */
+.cew-container .btn-outline-success {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background: transparent;
+}
+
+.cew-container .btn-outline-success:hover:not(:disabled) {
+  background: var(--color-success);
+  color: #fff;
+}
+
+/* ── btn-outline-danger ── */
+.cew-container .btn-outline-danger {
+  color: var(--color-error);
+  border-color: var(--color-error);
+  background: transparent;
+}
+
+.cew-container .btn-outline-danger:hover:not(:disabled) {
+  background: var(--color-error);
+  color: #fff;
+}
+
+/* ── btn-outline-light ── */
+.cew-container .btn-outline-light {
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+  background: transparent;
+}
+
+.cew-container .btn-outline-light:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+/* ── btn-outline-secondary ── */
+.cew-container .btn-outline-secondary {
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+  background: transparent;
+}
+
+.cew-container .btn-outline-secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+/* ── btn-close ── */
+.cew-container .btn-close,
+.cew-modal .btn-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md, 0.5rem);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cew-container .btn-close::before,
+.cew-modal .btn-close::before {
+  content: '\00D7';
+}
+
+.cew-container .btn-close:hover,
+.cew-modal .btn-close:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+/* ── form-check (radio / checkbox) ── */
+.cew-container .form-check,
+.cew-modal .form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  min-height: 1.5rem;
+}
+
+.cew-container .form-check-input,
+.cew-modal .form-check-input {
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0;
+  appearance: none;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-background);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.cew-container .form-check-input:checked,
+.cew-modal .form-check-input:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: inset 0 0 0 2.5px var(--color-background);
+}
+
+.cew-container .form-check-label,
+.cew-modal .form-check-label {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+/* ── badge ── */
+.cew-container .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.6em;
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: var(--weight-semibold, 600);
+  line-height: 1;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.cew-container .bg-success {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.cew-container .bg-secondary {
+  background: var(--color-text-muted);
+  color: #fff;
+}
+
+/* ── img-thumbnail ── */
+.cew-container .img-thumbnail {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 0.75rem);
+  padding: 4px;
+  background: var(--color-background);
+}
+
+/* ── alert ── */
+.cew-container .alert {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md, 0.5rem);
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.cew-container .alert-warning {
+  background: var(--color-warning-50, rgba(245, 158, 11, 0.08));
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning-100, rgba(245, 158, 11, 0.2));
+}
+
+/* ── utility: spacing ── */
+.cew-container .mb-2 { margin-bottom: 0.5rem; }
+.cew-container .mb-3 { margin-bottom: 1rem; }
+.cew-container .mb-4 { margin-bottom: 1.5rem; }
+.cew-container .mt-1 { margin-top: 0.25rem; }
+.cew-container .mt-2 { margin-top: 0.5rem; }
+.cew-container .mt-3 { margin-top: 1rem; }
+.cew-container .px-3 { padding-left: 1rem; padding-right: 1rem; }
+.cew-container .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+/* ── utility: flex ── */
+.cew-container .d-flex { display: flex; }
+.cew-container .flex-wrap { flex-wrap: wrap; }
+.cew-container .gap-2 { gap: 0.5rem; }
+.cew-container .align-items-center { align-items: center; }
+.cew-container .justify-content-between { justify-content: space-between; }
+
+/* ── utility: text ── */
+.cew-container .small { font-size: var(--text-sm, 0.875rem); }
+.cew-container .text-success { color: var(--color-success); }
+.cew-container .text-warning { color: var(--color-warning); }
+.cew-container .text-muted { color: var(--color-text-muted); }
+.cew-modal .mb-2 { margin-bottom: 0.5rem; }
+.cew-modal .mb-3 { margin-bottom: 1rem; }
+
+
+/* ═══════════════════════════════════
+   WIZARD-SPECIFIC STYLES
+   ═══════════════════════════════════ */
+
+/* ── layout ── */
+.cew-container {
+  padding: var(--space-lg, 1.5rem);
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.cew-wrapper {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 1rem);
+  padding: var(--space-xl, 2rem);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), border var(--transition);
+}
+
+/* ── step title ── */
+.cew-step-title {
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg, 1.5rem);
+  font-weight: var(--weight-semibold, 600);
+  font-size: var(--text-lg, 1.125rem);
+}
+
+/* ── field block ── */
+.cew-field {
+  margin-bottom: var(--space-lg, 1.25rem);
+}
+
+/* ── hint / description ── */
+.cew-hint {
+  font-size: var(--text-sm, 0.85rem);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs, 0.35rem);
+  line-height: 1.5;
+}
+
+.cew-word-count {
+  font-size: var(--text-xs, 0.8rem);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs, 0.25rem);
+}
+
+/* ── pill grid (categories / departments) ── */
+.cew-pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm, 0.5rem);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.cew-pill-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+}
+
+/* ── category block ── */
+.cew-category-block {
+  margin-bottom: var(--space-lg, 1.25rem);
+  padding: var(--space-md, 1rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 0.75rem);
+  background: var(--color-surface-hover);
+  transition: background var(--transition), border var(--transition);
+}
+
+.cew-category-block h5 {
+  margin-bottom: var(--space-base, 0.75rem);
+  font-weight: var(--weight-semibold, 600);
+  color: var(--color-text);
+  font-size: var(--text-base, 1rem);
+}
+
+/* ── coordinator card ── */
+.cew-coord-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  padding: var(--space-md, 1rem);
+  border-radius: var(--radius-lg, 0.75rem);
+  margin-top: var(--space-base, 0.75rem);
+  transition: background var(--transition), border var(--transition);
+}
+
+.cew-coord-card h6 {
+  margin-bottom: var(--space-base, 0.75rem);
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium, 500);
+}
+
+/* ── navigation buttons ── */
+.cew-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-xl, 2rem);
+  padding-top: var(--space-lg, 1.5rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.cew-nav .btn {
+  min-width: 100px;
+}
+
+/* ── review JSON ── */
+.cew-review-json {
+  background: var(--color-background);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  padding: var(--space-md, 1rem);
+  border-radius: var(--radius-lg, 0.75rem);
+  font-size: var(--text-sm, 0.82rem);
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  max-height: 420px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  transition: background var(--transition), border var(--transition);
+}
+
+[data-theme="dark"] .cew-review-json {
+  color: #a5d6a7;
+}
+
+/* ── image preview ── */
+.cew-preview img {
+  border-radius: var(--radius-lg, 0.75rem);
+  border: 1px solid var(--color-border);
+}
+
+/* ── doc-requirement modal ── */
+.cew-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  backdrop-filter: blur(4px);
+}
+
+.cew-modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl, 1rem);
+  width: 90%;
+  max-width: 480px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: cew-modal-in 0.2s ease-out;
+}
+
+@keyframes cew-modal-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cew-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md, 1rem) var(--space-lg, 1.25rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cew-modal-header h5 {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: var(--weight-semibold, 600);
+}
+
+.cew-modal-body {
+  padding: var(--space-lg, 1.25rem);
+  color: var(--color-text-secondary);
+}
+
+.cew-modal-body p {
+  margin-bottom: var(--space-md, 1rem);
+}
+
+/* ── responsive ── */
+@media (max-width: 640px) {
+  .cew-container {
+    padding: var(--space-base, 0.75rem);
+  }
+  .cew-wrapper {
+    padding: var(--space-md, 1rem);
+    border-radius: var(--radius-lg, 0.75rem);
+  }
+  .cew-category-block {
+    padding: var(--space-base, 0.75rem);
+  }
+  .cew-nav .btn {
+    min-width: 80px;
+    font-size: var(--text-sm, 0.875rem);
+  }
+}
+

@@ -1,0 +1,105 @@
+/* ============================================================
+   TrendingEvents – horizontal card carousel (fire theme)
+   ============================================================ */
+
+/* ---- Section ---- */
+.tre {
+  width: 100%;
+  padding: 0.5rem 0 1rem;
+}
+
+.tre-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 0.75rem 1rem;
+}
+
+.tre-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text, #111);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tre-icon {
+  color: #f97316;
+  font-size: 1.5rem;
+}
+
+/* ---- Slider wrapper (arrows + track) ---- */
+.tre-slider {
+  position: relative;
+  width: 100%;
+}
+
+/* ---- Scrollable track: SINGLE ROW ---- */
+.tre-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 1rem 1.25rem 1.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tre-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Empty state ---- */
+.tre-empty {
+  flex: 1;
+  text-align: center;
+  color: var(--color-text-muted, #888);
+  padding: 2rem 0;
+}
+
+/* ---- Navigation arrows ---- */
+.tre-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-surface, #fff);
+  color: #f97316;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, color 0.25s, transform 0.2s;
+  user-select: none;
+}
+
+.tre-arrow:hover {
+  background: #f97316;
+  color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.tre-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.tre-arrow--prev { left: 0.5rem; }
+.tre-arrow--next { right: 0.5rem; }
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .tre-arrow { display: none; }
+  .tre-track { padding: 0.75rem; gap: 1rem; }
+}

@@ -1,0 +1,147 @@
+/* ============================================================
+   EventCard – card used inside the carousel
+   ============================================================ */
+
+/* ---- Card (flex-child of .uce-track) ---- */
+.uce-card {
+  flex: 0 0 300px;          /* fixed width, never shrink */
+  min-width: 300px;
+  background: var(--color-surface, #fff);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  scroll-snap-align: start;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.uce-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* ---- Banner / gradient header ---- */
+.uce-card__banner {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--c1, #6366f1) 0%, var(--c2, #8b5cf6) 100%);
+  padding: 0 1rem;
+}
+
+.uce-card__banner-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ---- Body ---- */
+.uce-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.uce-card__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text, #111);
+  line-height: 1.3;
+}
+
+.uce-card__desc {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary, #666);
+  line-height: 1.55;
+  flex-grow: 1;
+}
+
+/* ---- Footer ---- */
+.uce-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border, #f0f0f0);
+  margin-top: auto;
+}
+
+.uce-card__author {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.uce-card__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.uce-card__author-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.uce-card__author-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text, #222);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uce-card__author-role {
+  font-size: 0.72rem;
+  color: var(--color-text-muted, #888);
+  text-transform: capitalize;
+}
+
+/* ---- Read More button ---- */
+.uce-card__btn {
+  flex-shrink: 0;
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.uce-card__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+}
+
+/* ---- Responsive card width ---- */
+@media (max-width: 640px) {
+  .uce-card {
+    flex: 0 0 260px;
+    min-width: 260px;
+  }
+
+  .uce-card__banner { height: 130px; }
+  .uce-card__title  { font-size: 1rem; }
+}

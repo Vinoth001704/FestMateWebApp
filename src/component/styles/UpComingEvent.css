@@ -1,0 +1,90 @@
+/* ============================================================
+   UpComingEvent – single-row horizontal card carousel
+   ============================================================ */
+
+/* ---- Section ---- */
+.uce {
+  width: 100%;
+  padding: 0.5rem 0 1rem;
+}
+
+.uce-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text, #111);
+  margin: 0 0 0.75rem 1rem;
+}
+
+/* ---- Slider wrapper (arrows + track) ---- */
+.uce-slider {
+  position: relative;
+  width: 100%;
+}
+
+/* ---- Scrollable track: SINGLE ROW ---- */
+.uce-track {
+  display: flex;
+  flex-wrap: nowrap;          /* force one row */
+  gap: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 1rem 1.25rem 1.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;       /* Firefox */
+}
+
+.uce-track::-webkit-scrollbar {
+  display: none;               /* Chrome / Safari */
+}
+
+/* ---- Empty state ---- */
+.uce-empty {
+  flex: 1;
+  text-align: center;
+  color: var(--color-text-muted, #888);
+  padding: 2rem 0;
+}
+
+/* ---- Navigation arrows ---- */
+.uce-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-surface, #fff);
+  color: var(--color-primary, #6366f1);
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, color 0.25s, transform 0.2s;
+  user-select: none;
+}
+
+.uce-arrow:hover {
+  background: var(--color-primary, #6366f1);
+  color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.uce-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.uce-arrow--prev { left: 0.5rem; }
+.uce-arrow--next { right: 0.5rem; }
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .uce-arrow { display: none; }
+  .uce-track { padding: 0.75rem; gap: 1rem; }
+}

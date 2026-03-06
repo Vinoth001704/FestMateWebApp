@@ -1,0 +1,19 @@
+/* Styles for EventRegisterWizard component */
+.register-wizard{width:100%;max-width:850px;padding:12px;}
+.register-wizard-panel{padding:18px;background:var(--panel-bg);border-radius:8px;box-shadow:var(--card-shadow);color:var(--text);border:1px solid var(--border)}
+.register-wizard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.register-wizard-title{margin:0;font-size:1.05rem}
+.register-wizard-description{margin-bottom:8px;color:var(--muted)}
+.register-wizard .form-control,.register-wizard .form-select,.register-wizard textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text)}
+.register-wizard .form-select option{background:var(--panel-bg, #23272f);color:var(--text, #fff)}
+.register-wizard-actions{display:flex;justify-content:space-between;margin-top:12px;gap:12px}
+.register-wizard .btn-accent{background:var(--accent);color:#000;border:none;padding:8px 12px;border-radius:6px}
+.register-wizard .btn-outline-light{background:transparent;border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px}
+
+/* small responsive tweaks */
+@media (max-width:600px){
+  .register-wizard{padding:8px}
+  .register-wizard-panel{padding:12px}
+  .register-wizard-actions{flex-direction:column;align-items:stretch}
+  .register-wizard-actions > div{display:flex;justify-content:flex-end}
+}
