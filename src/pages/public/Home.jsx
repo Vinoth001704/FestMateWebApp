@@ -31,7 +31,7 @@ export const Home = ({title,apiPath}) => {
         <div className="buttons">
           <NavLink to="/register" className="join">Get Started</NavLink>
           <NavLink to="/about" className="learn">Learn More</NavLink>
-          <button onClick={showExample} className="learn" style={{marginLeft:8}}>Show Toast</button>
+        
         </div>
       </div>
       <div className="img">
