@@ -32,6 +32,9 @@ const Users = ({ title = 'All Users' }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const USERS_PER_PAGE = 12;
 
   const roleFilter = TITLE_TO_ROLE[title] || null;
   const { pathname } = useLocation();
@@ -82,9 +85,44 @@ const Users = ({ title = 'All Users' }) => {
   };
 
   /* ── render ── */
+  /* ── filter + paginate ── */
+  const filteredUsers = users.filter((u) => {
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase();
+    const name = (u.name || u.username || '').toLowerCase();
+    const email = (u.email || '').toLowerCase();
+    const role = (u.role || u.user_role || '').toLowerCase();
+    return name.includes(q) || email.includes(q) || role.includes(q);
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / USERS_PER_PAGE));
+  const paginatedUsers = filteredUsers.slice(
+    (currentPage - 1) * USERS_PER_PAGE,
+    currentPage * USERS_PER_PAGE
+  );
+
+  // Reset to page 1 when search changes
+  useEffect(() => { setCurrentPage(1); }, [searchQuery]);
+
   return (
     <div className="dashboard-content">
       <div className="dashboard-view active" id="users">
+        {/* Search bar */}
+        <div className="users-search-bar">
+          <span className="material-symbols-rounded">search</span>
+          <input
+            type="text"
+            placeholder="Search users by name, email, or role..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button className="users-search-clear" onClick={() => setSearchQuery('')}>
+              <span className="material-symbols-rounded">close</span>
+            </button>
+          )}
+        </div>
+
         {loading && (
           <div className="users-loading">
             <span className="material-symbols-rounded spin">progress_activity</span>
@@ -95,12 +133,13 @@ const Users = ({ title = 'All Users' }) => {
         {error && <div className="users-error">{error}</div>}
 
         {!loading && !error && (
+          <>
           <div className="users-card-grid">
-            {users.length === 0 && (
+            {paginatedUsers.length === 0 && (
               <div className="users-empty">No users found.</div>
             )}
 
-            {users.map((u) => {
+            {paginatedUsers.map((u) => {
               const role = u.role || u.user_role || 'User';
               const name = u.name || u.username || 'Unknown';
               const avatar =
@@ -148,6 +187,36 @@ const Users = ({ title = 'All Users' }) => {
               );
             })}
           </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="users-pagination">
+              <button
+                className="users-pagination__btn"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((p) => p - 1)}
+              >
+                <span className="material-symbols-rounded">chevron_left</span>
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  className={`users-pagination__btn ${page === currentPage ? 'active' : ''}`}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                className="users-pagination__btn"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((p) => p + 1)}
+              >
+                <span className="material-symbols-rounded">chevron_right</span>
+              </button>
+            </div>
+          )}
+          </>
         )}
       </div>
     </div>

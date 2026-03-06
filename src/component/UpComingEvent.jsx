@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './styles/UpComingEvent.css'
 import EventCard from './EventCard'
 import Loader from './Loader'
 import { useAuth } from '../utils/AuthProvider'
 
-const UpComingEvent = () => {
+const UpComingEvent = ({ searchQuery = '', categoryFilter = 'all' }) => {
   const trackRef = useRef(null)
   const navigate = useNavigate()
   const { user } = useAuth()
@@ -74,6 +74,33 @@ const UpComingEvent = () => {
     }
   }
 
+  /* ---- Filter events by search & category ---- */
+  const filteredEvents = useMemo(() => {
+    let result = events
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter((ev) => {
+        const name = (ev.event_Name || ev.name || '').toLowerCase()
+        const desc = (ev.event_description || ev.text || '').toLowerCase()
+        const org = (ev.created_by || '').toLowerCase()
+        const tag = (ev.tag || ev.event || '').toLowerCase()
+        return name.includes(q) || desc.includes(q) || org.includes(q) || tag.includes(q)
+      })
+    }
+
+    if (categoryFilter && categoryFilter !== 'all') {
+      const cat = categoryFilter.toLowerCase()
+      result = result.filter((ev) => {
+        const tag = (ev.tag || ev.event || ev.category || '').toLowerCase()
+        const name = (ev.event_Name || ev.name || '').toLowerCase()
+        return tag.includes(cat) || name.includes(cat)
+      })
+    }
+
+    return result
+  }, [events, searchQuery, categoryFilter])
+
   return (
     <section className="uce">
       <h2 className="uce-heading">Upcoming Events</h2>
@@ -89,10 +116,10 @@ const UpComingEvent = () => {
 
         <div className="uce-track" ref={trackRef}>
           {loading && <Loader text="Loading events..." size="sm" />}
-          {!loading && events.length === 0 && (
+          {!loading && filteredEvents.length === 0 && (
             <p className="uce-empty">No upcoming events found.</p>
           )}
-          {events.map((ev, i) => {
+          {filteredEvents.map((ev, i) => {
             const props = toCardProps(ev)
             return (
               <EventCard

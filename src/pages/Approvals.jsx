@@ -37,6 +37,8 @@ const Approvals = ({ title = 'Pending Approvals' }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedId, setExpandedId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ROWS_PER_PAGE = 10;
 
   const isPending = title === 'Pending Approvals';
   const isRejected = title === 'Rejected';
@@ -194,6 +196,7 @@ const Approvals = ({ title = 'Pending Approvals' }) => {
         )}
 
         {!loading && !error && rows.length > 0 && (
+          <>
           <div className="approvals-table-wrap">
             <table className="approvals-table">
               <thead>
@@ -211,7 +214,14 @@ const Approvals = ({ title = 'Pending Approvals' }) => {
               </thead>
 
               <tbody>
-                {rows.map((r, i) => {
+                {(() => {
+                  const totalPages = Math.max(1, Math.ceil(rows.length / ROWS_PER_PAGE));
+                  const paginatedRows = rows.slice(
+                    (currentPage - 1) * ROWS_PER_PAGE,
+                    currentPage * ROWS_PER_PAGE
+                  );
+                  return paginatedRows.map((r, i) => {
+                  const idx = (currentPage - 1) * ROWS_PER_PAGE + i;
                   const id = r._id || r.id;
                   const status = r.status || (isPending ? 'Pending' : title);
                   const isExpanded = expandedId === id;
@@ -225,7 +235,7 @@ const Approvals = ({ title = 'Pending Approvals' }) => {
                         onClick={() => toggleExpand(id)}
                         style={{ cursor: 'pointer' }}
                       >
-                        <td>{i + 1}</td>
+                        <td>{idx + 1}</td>
                         <td className="approvals-event-name">
                           {evt?.event_Name || '…'}
                         </td>
@@ -448,10 +458,44 @@ const Approvals = ({ title = 'Pending Approvals' }) => {
                       )}
                     </React.Fragment>
                   );
-                })}
+                })})()}
               </tbody>
             </table>
           </div>
+
+          {/* Pagination */}
+          {(() => {
+            const totalPages = Math.max(1, Math.ceil(rows.length / ROWS_PER_PAGE));
+            if (totalPages <= 1) return null;
+            return (
+              <div className="approvals-pagination">
+                <button
+                  className="approvals-pagination__btn"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((p) => p - 1)}
+                >
+                  <span className="material-symbols-rounded">chevron_left</span>
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    className={`approvals-pagination__btn ${page === currentPage ? 'active' : ''}`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  className="approvals-pagination__btn"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage((p) => p + 1)}
+                >
+                  <span className="material-symbols-rounded">chevron_right</span>
+                </button>
+              </div>
+            );
+          })()}
+          </>
         )}
       </div>
     </div>

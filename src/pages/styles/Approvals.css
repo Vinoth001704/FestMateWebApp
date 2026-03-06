@@ -359,3 +359,47 @@
   background: rgba(16, 185, 129, 0.15);
   color: #34d399;
 }
+
+/* ─── Pagination ─── */
+
+.approvals-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.25rem 0 0.5rem;
+}
+
+.approvals-pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 1.5px solid var(--color-border, #e0e0e0);
+  border-radius: 0.5rem;
+  background: var(--color-surface, #fff);
+  color: var(--color-text-muted, #666);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.approvals-pagination__btn:hover:not(:disabled) {
+  border-color: #6366f1;
+  color: #6366f1;
+}
+
+.approvals-pagination__btn.active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+}
+
+.approvals-pagination__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
