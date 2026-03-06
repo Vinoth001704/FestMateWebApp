@@ -29,6 +29,7 @@ import Notifications from '../pages/Notifications';
 import Tasks from '../pages/Tasks';
 import Calendar from '../pages/Calendar';
 import { AutoRedirect } from './AutoRedirect';
+import NotFound from '../pages/NotFound';
 
 const MainRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -112,6 +113,7 @@ const MainRouter = createBrowserRouter(
       </Route>
     </Route> */}
 
+      <Route path="*" element={<NotFound />} />
 
     </>
   )

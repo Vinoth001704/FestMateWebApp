@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './styles/TrendingEvents.css'
 import EventCard from './EventCard'
+import Loader from './Loader'
 import { useAuth } from '../utils/AuthProvider'
 
 const TrendingEvents = () => {
@@ -9,6 +10,7 @@ const TrendingEvents = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
   const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
 
   /* ---- Fetch trending events ---- */
   useEffect(() => {
@@ -32,6 +34,8 @@ const TrendingEvents = () => {
         }
       } catch (err) {
         if (err.name !== 'AbortError') console.error('Failed to load trending events', err)
+      } finally {
+        setLoading(false)
       }
     }
     load()
@@ -92,7 +96,8 @@ const TrendingEvents = () => {
         </button>
 
         <div className="tre-track" ref={trackRef}>
-          {events.length === 0 && (
+          {loading && <Loader text="Loading trending events..." size="sm" />}
+          {!loading && events.length === 0 && (
             <p className="tre-empty">No trending events found.</p>
           )}
           {events.map((ev, i) => {

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './styles/UpComingEvent.css'
 import EventCard from './EventCard'
+import Loader from './Loader'
 import { useAuth } from '../utils/AuthProvider'
 
 const UpComingEvent = () => {
@@ -9,6 +10,7 @@ const UpComingEvent = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
   const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
 
   /* ---- Fetch events ---- */
   useEffect(() => {
@@ -29,6 +31,8 @@ const UpComingEvent = () => {
         }
       } catch (err) {
         if (err.name !== 'AbortError') console.error('Failed to load events', err)
+      } finally {
+        setLoading(false)
       }
     }
     load()
@@ -84,7 +88,8 @@ const UpComingEvent = () => {
         </button>
 
         <div className="uce-track" ref={trackRef}>
-          {events.length === 0 && (
+          {loading && <Loader text="Loading events..." size="sm" />}
+          {!loading && events.length === 0 && (
             <p className="uce-empty">No upcoming events found.</p>
           )}
           {events.map((ev, i) => {
