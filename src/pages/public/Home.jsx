@@ -35,7 +35,7 @@ export const Home = ({title,apiPath}) => {
         </div>
       </div>
       <div className="img">
-        <img src={`./hero-bg.png`} alt="FestMate Hero" />
+        <img src={`./Hero-bg.png`} alt="FestMate Hero" />
       </div>
     </section>
    </div>

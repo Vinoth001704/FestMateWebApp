@@ -39,67 +39,67 @@ const MainRouter = createBrowserRouter(
       <Route path='/' element={<PublicLayout />}>
 
         <Route index element={<Home title='Home' />} />
-        <Route path='about' element={<About title='About' />} />
-        <Route path='services' element={<Services title='Services' />} />
-        <Route path='login' element={<Login title='Login' />} />
-        <Route path='register' element={<Register title='Register' />} />
-        <Route path='verify-otp' element={<VerifyOtp title='Verify OTP' />} />
+        <Route path='about' element={<About title='About Us' />} />
+        <Route path='services' element={<Services title='Our Services' />} />
+        <Route path='login' element={<Login title='Sign In' />} />
+        <Route path='register' element={<Register title='Create Account' />} />
+        <Route path='verify-otp' element={<VerifyOtp title='OTP Verification' />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
           <Route path="/admin" element={<AdminLayout />}>
-               <Route index element={<Dashboard title="Overview" />} />
+               <Route index element={<Dashboard title="Dashboard Overview" />} />
                <Route path="events" element={<EventLayout />}>
-                 <Route index element={<Events title="Events" />} />
+                 <Route index element={<Events title="Event Management" />} />
                  <Route path="api/:id" element={<EventDetailsPage title="Event Details" />} />
                  <Route path="myevents" element={<MyEvents title="My Events" />} />
-                 <Route path="create" element={<CreateEvent title="Create Event" />} />
+                 <Route path="create" element={<CreateEvent title="Create New Event" />} />
                </Route>
-               <Route path="projects" element={<Project title="Projects" />} />
+               <Route path="projects" element={<Project title="Project Management" />} />
                <Route path="users">
-                 <Route index element={<Users title="All Users" />} />
-                 <Route path="students" element={<Users title="Students" />} />
-                 <Route path="coordinators" element={<Users title="Coordinators" />} />
+                 <Route index element={<Users title="User Management" />} />
+                 <Route path="students" element={<Users title="Student Directory" />} />
+                 <Route path="coordinators" element={<Users title="Coordinator Directory" />} />
                </Route>
                <Route path="approvals">
                  <Route index element={<Approvals title="Pending Approvals" />} />
-                 <Route path="approved" element={<Approvals title="Approved" />} />
-                 <Route path="rejected" element={<Approvals title="Rejected" />} />
+                 <Route path="approved" element={<Approvals title="Approved Requests" />} />
+                 <Route path="rejected" element={<Approvals title="Rejected Requests" />} />
                </Route>
-               <Route path='reports' element={<Reports title="Reports"/>}/>
-               <Route path="calendar" element={<Calendar title="Calendar" />} />
+               <Route path='reports' element={<Reports title="Analytics & Reports"/>}/>
+               <Route path="calendar" element={<Calendar title="Event Calendar" />} />
                <Route path="notifications" element={<Notifications title="Notifications" />} />
-               <Route path="profile" element={<Profile title="Profile"/>}/>
+               <Route path="profile" element={<Profile title="My Profile"/>}/>
                <Route path="user/:id" element={<UserProfile title="User Profile"/>}/>
-               <Route path='settings' element={<Settings title="Settings"/>}/>
+               <Route path='settings' element={<Settings title="Account Settings"/>}/>
           </Route>
       </Route>
       <Route element={<ProtectedRoute allowedRoles={['Coordinator']} />}>
       <Route path="/coordinator" element={<CoordinatorLayout/>}>
-        <Route  index element={<Dashboard  title="Overview" />} />
+        <Route  index element={<Dashboard  title="Dashboard Overview" />} />
          <Route path="events" element={<EventLayout />}>
-           <Route index element={<Events title="Events" />} />
+           <Route index element={<Events title="Event Management" />} />
            <Route path="api/:id" element={<EventDetailsPage title="Event Details" />} />
          </Route>
-        <Route path="tasks" element={<Tasks title="Tasks" />} />
-        <Route path="calendar" element={<Calendar title="Calendar" />} />
-        <Route path='settings' element={<Settings title="Settings"/>}/>
-         <Route path="profile" element={<Profile title="Profile"/>}/>
+        <Route path="tasks" element={<Tasks title="Task Management" />} />
+        <Route path="calendar" element={<Calendar title="Event Calendar" />} />
+        <Route path='settings' element={<Settings title="Account Settings"/>}/>
+         <Route path="profile" element={<Profile title="My Profile"/>}/>
          <Route path="user/:id" element={<UserProfile title="User Profile"/>}/>
        </Route>    
       </Route>
       <Route element={<ProtectedRoute allowedRoles={['Student']} />}>
       <Route path="/student" element={<StudentLayout />}>
-        <Route  index element={<Dashboard title="Overview" />} />
+        <Route  index element={<Dashboard title="Dashboard Overview" />} />
           <Route path="events" element={<EventLayout />}>
-             <Route index element={<Events title="Events" />} />
-             <Route path="registered" element={<RegisteredEvents title="My Registered Events" />} />
+             <Route index element={<Events title="Browse Events" />} />
+             <Route path="registered" element={<RegisteredEvents title="My Registrations" />} />
                    <Route path="api/:id" element={<EventDetailsPage title="Event Details" />} />
                </Route>
-         <Route path="profile" element={<Profile title="Profile"/>}/>
+         <Route path="profile" element={<Profile title="My Profile"/>}/>
          <Route path="user/:id" element={<UserProfile title="User Profile"/>}/>
-         <Route path="calendar" element={<Calendar title="Calendar" />} />
-         <Route path="settings" element={<Settings title="Settings"/>}/>
+         <Route path="calendar" element={<Calendar title="Event Calendar" />} />
+         <Route path="settings" element={<Settings title="Account Settings"/>}/>
        </Route>    
       </Route>
                    {/* <Route element={<ProtectedRoute allowedRoles={['Student']} />}>
