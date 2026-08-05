@@ -67,10 +67,11 @@ export const Register = ({ title }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (usernameValid && passwordValid && form.email && form.role && form.context && form.gender) {
+    // console.log(form);
+    if (form.name && form.password && form.email && form.role && form.context && form.gender) {
       try {
-        const payload = { ...form, role: { name: form.role } };
-        console.log('Register payload:', JSON.stringify(payload, null, 2));
+        const payload = form;
+        JSON.stringify(payload, null, 2);
         const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/register`, payload);
         const { message, user, token } = res.data;
         console.log(res.data);
